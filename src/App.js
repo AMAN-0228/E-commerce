@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import Home from './Pages/Home'
@@ -10,20 +9,35 @@ import SingleProduct from './Pages/SingleProduct'
 import NotFound from './Pages/NotFound';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
+import { ThemeProvider } from 'styled-components';
+import GlobalStyle from './Components/styled/GlobalStyled';
 
 function App() {
+  const theme = {
+    color:{
+      highlighter:"#F08080",
+      bg:"#f3f3",
+
+    },
+    mobile:"768px"
+  }
+
   return (
-    <Routes>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle/>
       <Header/>
-      <Route path='/' element={<Home />}/>
-      <Route path='/about' element={<About/>}/>
-      <Route path='singleProduct/:id' element={<SingleProduct/>}/>
-      <Route path='/contact' element={<Contact/>}/>
-      <Route path='/products' element={<Products/>}/>
-      <Route path='/cart' element={<Cart/>}/>
-      <Route path='*' element={<NotFound/>}/>
+      <Routes>
+        <Route path='/' element={<Home />}/>
+        <Route path='/about' element={<About/>}/>
+        <Route path='singleProduct/:id' element={<SingleProduct/>}/>
+        <Route path='/contact' element={<Contact/>}/>
+        <Route path='/products' element={<Products/>}/>
+        <Route path='/cart' element={<Cart/>}/>
+        <Route path='*' element={<NotFound/>}/>
+      </Routes>
       <Footer/>
-    </Routes>
+    </ThemeProvider>
+    
   );
 }
 
