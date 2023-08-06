@@ -15,9 +15,11 @@ import GlobalStyle from './Components/styled/GlobalStyled';
 function App() {
   const theme = {
     color:{
+      color1:"#FF8551",
+      color2:"#E55807",
       highlighter:"#F08080",
       bg:"#f3f3",
-
+      contentColor: "#454545"
     },
     mobile:"768px"
   }
@@ -29,7 +31,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />}/>
         <Route path='/about' element={<About/>}/>
-        <Route path='singleProduct/:id' element={<SingleProduct/>}/>
+        <Route path='/singleProduct' element={<SingleProduct/>}/>
         <Route path='/contact' element={<Contact/>}/>
         <Route path='/products' element={<Products/>}/>
         <Route path='/cart' element={<Cart/>}/>

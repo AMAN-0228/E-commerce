@@ -1,23 +1,24 @@
 import styled from 'styled-components'
 
 const StyledHeader = styled.header`    
-    // background:#F08080;
+    background:#176B87;
     height : 80px;
     display : flex;
     justify-content : space-between;
     align-items : center;
-    border:1px solid #ffe;
+    border-bottom:1px solid #ffe;
     box-shadow : 1px 1px 2px #333;
-    margin-bottom : 20px;
     a{
         height : 78px;
     }
     @media(max-width:${({theme})=>theme.mobile}){
-        // z-index: 9999;
+        z-index: 1;
         // height : 100vh;
-        // width : 100vw;
+        width : 100vw;
         // align-items : start;
-        position : relative
+        position : fixed;
+        top : 0;
+
        
     }
 `
@@ -27,8 +28,8 @@ const Logo = styled.img`
 `
 
 const StyledNav = styled.nav`
-    padding-inline: 25px;
-
+    padding-inline: 50px;
+    font-size : 18px;
     ul{
         display : flex;
         justify-content : space-between;
@@ -40,6 +41,14 @@ const StyledNav = styled.nav`
         list-style : none;
         a{
             text-decoration : none;
+            color : #40128B;
+            &:hover{ 
+                // background:#fff;               
+                color:${({theme})=>theme.color.highlighter};
+            }
+            &:active{
+                color:${({theme})=>theme.color.highlighter};
+            }
         }
         span{
             position : absolute;
@@ -68,7 +77,7 @@ const StyledNav = styled.nav`
             position : fixed;
             height : 100vh;
             width : 100vw;
-            left : -100%;
+            left : -120%;
             top : 80px;
             background: #fff;
             transition : all .5s;
@@ -86,13 +95,7 @@ const StyledNav = styled.nav`
             li{
                 a{
                     // color : #fff;
-                    &:hover{ 
-                        background:#fff;               
-                        color:${({theme})=>theme.color.highlighter};
-                    }
-                    &:active{
-                        color:${({theme})=>theme.color.highlighter};
-                    }
+                    
                 }
             }
         }
