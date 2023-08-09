@@ -14,11 +14,11 @@ const Container = styled.div`
         span{
             display : block;
         }
-        div{
-            display : flex;
-            flex-direction : column;
-            gap :2rem;
-        }
+        // div{
+        //     display : flex;
+        //     flex-direction : column;
+        //     gap :2rem;
+        // }
     }
     
 `

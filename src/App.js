@@ -29,9 +29,9 @@ function App() {
       <GlobalStyle/>
       <Header/>
       <Routes>
-        <Route path='/' element={<Home />}/>
+        <Route exact path='/' element={<Home />}/>
         <Route path='/about' element={<About/>}/>
-        <Route path='/singleProduct' element={<SingleProduct/>}/>
+        <Route path='/singleProduct/:id' element={<SingleProduct/>}/>
         <Route path='/contact' element={<Contact/>}/>
         <Route path='/products' element={<Products/>}/>
         <Route path='/cart' element={<Cart/>}/>

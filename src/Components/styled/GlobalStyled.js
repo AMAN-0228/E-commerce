@@ -15,6 +15,15 @@ const GlobalStyle = createGlobalStyle`
     .grid-three-columns{
         grid-template-columns : repeat(3,2fr);
     }
+    .grid-temp-col{
+        grid-template-columns : ${({Col})=>Col}
+    }
+    .grid-col{
+        grid-column : ${({col})=>col};
+    }
+    .grid-row{
+        grid-row : ${({row})=>row};
+    }
     .flex{
         display :flex;
     }

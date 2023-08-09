@@ -19,8 +19,8 @@ const Nav = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to='/Product' onClick={()=>setToggle(false)}>
-            Product
+          <NavLink to='/products' onClick={()=>setToggle(false)}>
+            Products
           </NavLink>
         </li>
         <li>
