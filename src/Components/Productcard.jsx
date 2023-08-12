@@ -1,6 +1,7 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
 import Card from './styled/Card'
+import FormatePrice from './FormatePrice'
 
 const Productcard = ({data}) => {
   return (
@@ -13,7 +14,7 @@ const Productcard = ({data}) => {
       </NavLink>
       <div>
         <span>{data.name}</span>
-        <span>{data.price}</span>
+        <span><FormatePrice price = {data.price}/></span>
       </div>
     </Card>
   )

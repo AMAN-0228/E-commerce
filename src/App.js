@@ -21,7 +21,8 @@ function App() {
       bg:"#f3f3",
       contentColor: "#454545"
     },
-    mobile:"768px"
+    mobile:"768px",
+    tablet : "996px"
   }
 
   return (

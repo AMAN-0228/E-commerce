@@ -32,7 +32,9 @@
 .App-link {
   color: #61dafb;
 }
-
+.App:only-child{
+  
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

@@ -1,23 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import { styled } from 'styled-components';
 
-const MyImg = ({images}) => {
-  const [preview, setPreview] = useState();
+const MyImg = ({images = [{url:""}]}) => {
+  const [previewImg, setPreviewImg] = useState(images[0]);
   console.log(images)
+  useEffect(() => {    
+    setPreviewImg(images[0])  
+  }, [images])
   
   return (
     <ImgBox>
         <div className="all-imgs-container">
             {
               images.map((item,index)=>{
-                <div className="img-box" key={index} onClick={()=> setPreview({...item})}>
-                  <img src={item.url} alt={item.filename} />
-                </div>
+                 return (
+                  <figure className="img-box" key={index} >
+                    <img src={item.url} alt={item.filename} onClick={()=> setPreviewImg(item)}/>
+                  </figure>
+                 )
               })
             }
         </div>
         <div className="preview-img">
-            {preview && <img src={preview.url} alt={preview.filename} />}
+            <img src={previewImg.url} alt={previewImg.filename} />
         </div>
       
     </ImgBox>
@@ -30,9 +35,16 @@ const ImgBox = styled.div`
   .all-imgs-container{
     display : flex;
     flex-direction : column;
-    width : 200px;
-    height : 200px;
-    
+    justify-content : center;
+    padding-block : 20px;
+    gap : 1rem;
+    figure{
+      cursor : pointer;
+      width : 200px;
+      img{
+        width : 180px;
+      }
+    }
   }
   .preview-img{
     width : 360px;
@@ -44,6 +56,9 @@ const ImgBox = styled.div`
       width : inherit;
       // height : 500px;
     }
+  }
+  @media(max-width : ${({theme})=>theme.color.tablet}){
+    grid-template-columns : .4fr 1fr;
   }
 `
 
