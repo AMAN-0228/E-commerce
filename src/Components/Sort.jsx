@@ -4,7 +4,7 @@ import { styled } from 'styled-components'
 import { useFilterContext } from '../context/FilterContext'
 
 const Sort = () => {
-  const{SetGridView,SetListView,sort} = useFilterContext();
+  const{SetGridView,SetListView,sort,filtered_Products} = useFilterContext();
   return (
     <div className="products-page-right-top">
       <div>
@@ -16,7 +16,7 @@ const Sort = () => {
         </Button>
       </div>
       <div>
-        no of product
+        {`${filtered_Products.length} product` }
       </div>
       <div>
         <form>

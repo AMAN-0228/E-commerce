@@ -45,6 +45,28 @@ const FilterReducer = (state,action)=>{
                 ...state,
                 filtered_Products : newList,
             }
+        case "UPDATE_FILTER_VALUE":
+            // const {filter} = state
+            console.log(action.payload.name ,action.payload.value)
+            return{
+                ...state,
+                filter : {
+                    ...state.filter,
+                    [action.payload.name] : action.payload.value,
+                }
+            }
+        case "FILTER_PRODUCT":
+            const {all_Products} = state
+            let tempFilteredProduct = [...all_Products]
+            const {text} = state.filter
+            // if(category != "ALL")
+            let newfilteredProduct = tempFilteredProduct.filter((item)=>{
+                return item.name.toLowerCase().includes(text)
+            })
+            return{
+                ...state,
+                filtered_Products : newfilteredProduct,
+            }
         default:
             return{
                 ...state

@@ -1,11 +1,60 @@
 import React from 'react'
+import { useFilterContext } from '../context/FilterContext'
+import { styled } from 'styled-components';
 
 const Filter = () => {
+  const {
+    updateFilter,
+    all_Products,
+    filter :{text}
+  } = useFilterContext();
+
+  // to get unique value of each field
+  const getUniqueData = (data,property)=>{
+    let newList = data.map((item)=>{
+      return item[property]
+    })
+    newList = ["ALL", ...new Set(newList)]
+    // console.log(newList)
+    return newList
+  }
+  // unique data
+  const CategoryOnlyData = getUniqueData(all_Products,"category")
+  const CompanyOnlyData = getUniqueData(all_Products,"company")
+  const ColorsOnlyData = getUniqueData(all_Products,"colors")
   return (
-    <>
-      filter
-    </>
+    <Wrapper>
+    <div className="filter-search">
+
+      <form action="#" onSubmit={(e)=>e.preventDefault()}>
+        <input type="text" name="text" id="search" value={text} onChange={updateFilter}/>
+      </form>
+    </div>
+    <div className="filter-category">
+      <h2>Category</h2>
+      <ul>
+        {
+          CategoryOnlyData.map((item,index)=>{
+            return <li key={index}>{item}</li>
+          })
+        }
+      </ul>
+    </div>
+    <div className="filter-company">
+      <select name="company"  id="">{
+        CompanyOnlyData.map((item,index)=>{
+          return <option key={index} value={item}>{item}</option>
+        })
+      }        
+      </select>
+    </div>
+    </Wrapper> 
   )
 }
+
+const Wrapper = styled.div`
+  display : flex;
+  flex-direction : column;
+`
 
 export default Filter
