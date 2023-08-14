@@ -32,15 +32,20 @@ const FilterContextProvider = ({children})=>{
     const sort = (event)=>{
         dispatch({type : "SET_SORT_VALUE",payload : `${event.target.value}`})
     }
-    // set filter 
+    // set filter value
     const updateFilter = (e) =>{
         const name  = e.target.name
         const value = e.target.value
         return dispatch({type : "UPDATE_FILTER_VALUE",payload:{name,value}})
     }
-    // sorting the data
+    // reset filter 
+    const resetFilter = (e) =>{
+        dispatch({type : "FILTER_VALUES_RESET"})
+    }
+    // sorting the data and filter
     useEffect(()=>{
         dispatch({type : "FILTER_PRODUCT"})
+        dispatch({type : "Filter_DATA"})
         dispatch({type : "SORT_PRODUCT"})
     },[state.sort_value,products,state.filter])
     // setting data
@@ -48,7 +53,7 @@ const FilterContextProvider = ({children})=>{
         dispatch({type : "SET_FILTERED_DATA",payload : products});
       },[products])
     return (
-        <FilterContext.Provider value={{...state,SetGridView,SetListView,sort,updateFilter}}>
+        <FilterContext.Provider value={{...state,SetGridView,SetListView,sort,updateFilter,resetFilter}}>
             {children}
         </FilterContext.Provider>
     )

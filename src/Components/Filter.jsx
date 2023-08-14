@@ -6,7 +6,8 @@ const Filter = () => {
   const {
     updateFilter,
     all_Products,
-    filter :{text}
+    resetFilter,
+    filter :{text,company}
   } = useFilterContext();
 
   // to get unique value of each field
@@ -14,7 +15,12 @@ const Filter = () => {
     let newList = data.map((item)=>{
       return item[property]
     })
-    newList = ["ALL", ...new Set(newList)]
+    if(property ==='colors'){
+      newList = ["ALL",...new Set(newList.flat())]
+    }
+    else{
+      newList = ["ALL", ...new Set(newList)]
+    }
     // console.log(newList)
     return newList
   }
@@ -35,18 +41,32 @@ const Filter = () => {
       <ul>
         {
           CategoryOnlyData.map((item,index)=>{
-            return <li key={index}>{item}</li>
+            return <button type='button' name='category' value={item} key={index} onClick={updateFilter}>{item}</button>
           })
         }
       </ul>
     </div>
     <div className="filter-company">
-      <select name="company"  id="">{
+      <h2>Company</h2>
+      <form action="#" onSubmit={(e)=>e.preventDefault()}>
+      <select name="company"  id=""  onClick={updateFilter} value={company}>{
         CompanyOnlyData.map((item,index)=>{
-          return <option key={index} value={item}>{item}</option>
+          return <option key={index} name='company' value={item} >{item}</option>
         })
       }        
       </select>
+      </form>
+    </div>
+    <div className="filter-color">
+      <h2>Color : </h2>
+      {
+        ColorsOnlyData.map((item,index)=>{
+          return <button type='button' key={index} name='color' value={item} onClick={updateFilter}>{item}</button>
+        })
+      }
+    </div>
+    <div className="filter-reset">
+      <button className="filter-reset-btn" type='button' onClick={resetFilter}>Reset</button>
     </div>
     </Wrapper> 
   )

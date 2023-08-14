@@ -5,7 +5,7 @@ import { useFilterContext } from '../context/FilterContext';
 
 const ProductsView = () => {
     const {filtered_Products,grid_view} = useFilterContext();
-    console.log(filtered_Products)
+    // console.log(filtered_Products)
   return (
     <div>
       {grid_view && <GridView products={filtered_Products}/>}

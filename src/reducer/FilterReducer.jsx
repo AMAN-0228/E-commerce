@@ -58,14 +58,44 @@ const FilterReducer = (state,action)=>{
         case "FILTER_PRODUCT":
             const {all_Products} = state
             let tempFilteredProduct = [...all_Products]
-            const {text} = state.filter
+            const {text,category,company,color} = state.filter
             // if(category != "ALL")
-            let newfilteredProduct = tempFilteredProduct.filter((item)=>{
+            
+            if(category !== "ALL"){
+                tempFilteredProduct = tempFilteredProduct.filter(item=>{
+                    return item.category === category
+                })
+            }
+            if(company !== "ALL"){
+                tempFilteredProduct = tempFilteredProduct.filter(item=>{
+                    return item.company === company
+                })
+            }
+            if(color !== "ALL"){
+                tempFilteredProduct = tempFilteredProduct.filter(item=>{
+                    return item.colors.includes(color)
+                })
+            }
+            // search box filter
+            tempFilteredProduct = tempFilteredProduct.filter((item)=>{
                 return item.name.toLowerCase().includes(text)
             })
+            // console.log(tempFilteredProduct)
+            // let newfilteredProduct = tempFilteredProduct
             return{
                 ...state,
-                filtered_Products : newfilteredProduct,
+                // filtered_Products : newfilteredProduct,
+                filtered_Products : tempFilteredProduct,
+            }
+        case "FILTER_VALUES_RESET":
+            return{
+                ...state,
+                filter :{
+                    text:"",
+                    company : "ALL",
+                    category : "ALL",
+                    color : "ALL"
+                }
             }
         default:
             return{
