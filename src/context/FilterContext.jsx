@@ -13,7 +13,10 @@ const initialState = {
         text:"",
         company : "ALL",
         category : "ALL",
-        color : "ALL"
+        color : "ALL",
+        price : 0,
+        maxPrice : 0,
+        minPrice : 0,
     }
 }
 
@@ -48,6 +51,10 @@ const FilterContextProvider = ({children})=>{
         dispatch({type : "Filter_DATA"})
         dispatch({type : "SORT_PRODUCT"})
     },[state.sort_value,products,state.filter])
+    // set max min price value
+    useEffect(()=>{
+        dispatch({type : "FILTER_PRICE_VALUE"})
+    },[state.all_Products,state.filter.maxPrice])
     // setting data
     useEffect(()=>{
         dispatch({type : "SET_FILTERED_DATA",payload : products});

@@ -1,10 +1,37 @@
 const FilterReducer = (state,action)=>{
+    const {
+        filtered_Products,
+        sort_value,
+        all_Products
+    } = state
+    
+
     switch (action.type) {
         case "SET_FILTERED_DATA":
             return{
                 ...state,
                 all_Products : [...action.payload],
                 filtered_Products : [...action.payload],
+            }
+        case "FILTER_PRICE_VALUE":
+            let tempData = [...all_Products]
+            let priceList = tempData.map((item)=>{
+                return item.price
+            })
+            console.log(tempData)
+            console.log(priceList)
+            let max_price = Math.max(...priceList)
+            let min_price = Math.min(...priceList)
+            console.log(max_price)
+            return{
+                ...state,
+                filter : {
+                    ...state.filter,
+                    price : max_price,
+                    maxPrice : max_price,
+                    minPrice : min_price,
+                    
+                }
             }
         case "SET_LIST_VIEW":
             return{
@@ -23,7 +50,6 @@ const FilterReducer = (state,action)=>{
                 sort_value : action.payload ,
             }
         case "SORT_PRODUCT":
-            const {filtered_Products,sort_value} = state
             let temp = [...filtered_Products]
             const SortCompareFn = (a,b)=>{
                 switch (sort_value) {
@@ -56,9 +82,14 @@ const FilterReducer = (state,action)=>{
                 }
             }
         case "FILTER_PRODUCT":
-            const {all_Products} = state
+            const {
+                text,
+                category,
+                company,
+                color,
+                price
+            } = state.filter
             let tempFilteredProduct = [...all_Products]
-            const {text,category,company,color} = state.filter
             // if(category != "ALL")
             
             if(category !== "ALL"){
@@ -76,6 +107,10 @@ const FilterReducer = (state,action)=>{
                     return item.colors.includes(color)
                 })
             }
+            // price range filter
+            tempFilteredProduct = tempFilteredProduct.filter(item=>{
+                return item.price <= price
+            })
             // search box filter
             tempFilteredProduct = tempFilteredProduct.filter((item)=>{
                 return item.name.toLowerCase().includes(text)
@@ -91,10 +126,14 @@ const FilterReducer = (state,action)=>{
             return{
                 ...state,
                 filter :{
+                    ...state.filter,
                     text:"",
                     company : "ALL",
                     category : "ALL",
-                    color : "ALL"
+                    color : "ALL",
+                    maxPrice : 0,
+                    price : 0,
+                    minPrice : 0,
                 }
             }
         default:

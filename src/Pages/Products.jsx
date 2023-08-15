@@ -29,7 +29,7 @@ const StyledGri = styled.section`
   grid-template-columns : repeat(12,1fr);
   column-gap : 32px;
   .products-page-left{
-    grid-column : 2/3;
+    grid-column : 2/4;
   }
   .products-page-right{
     grid-column : 4/12;
@@ -59,6 +59,9 @@ const StyledGri = styled.section`
         
       }
     }
+  }
+  @media(max-width : ${({theme})=>theme.mobile}){
+    margin-top :90px;
   }
 `
 

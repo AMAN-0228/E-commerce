@@ -4,45 +4,72 @@ import { styled } from 'styled-components'
 import { useFilterContext } from '../context/FilterContext'
 
 const Sort = () => {
-  const{SetGridView,SetListView,sort,filtered_Products} = useFilterContext();
+  const{SetGridView,SetListView,sort,filtered_Products,grid_view} = useFilterContext();
   return (
     <div className="products-page-right-top">
-      <div>
-        <Button className="view-option" onClick={SetGridView}>
+      <BtnWrapper>
+        <button className={`view-option ${grid_view?'sort-btn-active':''}`} onClick={SetGridView}>
           <BsFillGridFill />
-        </Button>
-        <Button className="view-option" onClick={SetListView}>
+        </button>
+        <button className={`view-option ${grid_view?'':'sort-btn-active'}`} onClick={SetListView}>
           <BsList/>
-        </Button>
-      </div>
+        </button>
+      </BtnWrapper>
       <div>
         {`${filtered_Products.length} product` }
       </div>
       <div>
-        <form>
+        <StyledForm>
           <select name="sort" id="sort" onClick={sort}>
-            <option value="lowest">Price low-high</option>
+            <option value="lowest" className='options'>Price low-high</option>
+            <option value="#" disabled></option>
             <option value="highest">Price high-low</option>
+            <option value="#" disabled></option>
             <option value="a-z">Name a-z</option>
+            <option value="#" disabled></option>
             <option value="z-a">Name z-a</option>
           </select>
-        </form>
+        </StyledForm>
       </div>
     </div>
   )
 }
 
-const Button = styled.button`
-  margin-inline : 20px;
+const BtnWrapper = styled.div`
+  button{
+    margin-inline : 20px;
   background-color: #F8F0E5;
+  background: lightgray;
+  // background: gainsboro;
   padding: 5px 8px;
   font-size: 20px;
   border-color: transparent;
   border-radius: 5px;
   cursor : pointer;
-  &:hover:active{
-    svg{
-      color : red;
+  // &:has(:hover,:active){
+  //   svg{
+  //     color : red;
+  //   }
+  // }
+  }
+  
+  .sort-btn-active{
+    color : white;
+    background-color : black;
+  }
+`
+
+const StyledForm = styled.form`
+  margin-inline : 10px;
+  select{
+    padding : 5px 3px;
+    .options{
+      // color : red;
+      margin : 13px 2px;
+    }
+    option{
+      // color : red;
+      // text-align : center;
     }
   }
 `
