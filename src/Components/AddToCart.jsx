@@ -1,27 +1,22 @@
 import React, { useState } from 'react'
-import { BiMinus } from 'react-icons/bi'
-import { BsPlus } from 'react-icons/bs'
 import { NavLink } from 'react-router-dom'
 import { styled } from 'styled-components'
 import { useCartContext } from '../context/CartContext'
+import QuantityToggle from './QuantityToggle'
 
 const AddToCart = ({product}) => {
     const {addToCart} = useCartContext()
-    const [count,setCount] = useState(1)
+    const [quantity,setQuantity] = useState(1)
     const Increment = ()=>{
-        count < product.stock && setCount(count + 1)
+        quantity < product.stock && setQuantity(quantity + 1)
     }
     const Decrement = ()=>{
-        count > 1 && setCount(count - 1)
+        quantity > 1 && setQuantity(quantity - 1)
     }
   return (
     <Wrapper>
-      <div className="numerical-value">
-        <BsPlus className='icon' onClick={Increment}/>
-        <span>{count}</span>
-        <BiMinus className='icon' onClick={Decrement}/>
-      </div>
-      <NavLink to='/cart' onClick={()=> addToCart(product.id,product.colors[0],count,product)}>
+      <QuantityToggle quantity={quantity} Increment={Increment} Decrement={Decrement}/>
+      <NavLink to='/cart' onClick={()=> addToCart(product.id,product.colors[0],quantity,product)}>
         <button type='button' >ADD TO CART</button>
       </NavLink>
     </Wrapper>

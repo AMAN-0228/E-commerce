@@ -1,13 +1,15 @@
 import React from 'react'
 import { useCartContext } from '../context/CartContext'
-import { styled } from 'styled-components';
-import { MdDelete } from 'react-icons/md';
-import FormatePrice from '../Components/FormatePrice';
-import CartItem from '../Components/CartItem';
+import { styled } from 'styled-components'
+import CartItem from '../Components/CartItem'
+import { NavLink } from 'react-router-dom'
 
 const Cart = () => {
-  const{cart} = useCartContext();
-  console.log(cart)
+  const{cart,clearCart} = useCartContext();
+  // console.log(cart)
+  if(cart.length ===0){
+    return <EmptyDiv><h3>No Item in Cart</h3></EmptyDiv>
+  }
   return (
     <Wrapper>
       <div className="cart-items-display">
@@ -28,6 +30,12 @@ const Cart = () => {
           })}
         </div>
         <hr />
+        <div className="cart-btn">
+          <NavLink to='/products'>
+            <button type='button' >Continue Shopping</button>
+          </NavLink>
+          <button type='button' onClick={clearCart}>Clear Cart</button>
+        </div>
       </div>
     </Wrapper>
   )
@@ -81,6 +89,31 @@ const Wrapper = styled.section`
         }
       }
     }
+    .cart-btn{
+      margin-block : 2rem;
+      padding : 4px 3px;
+      display : flex;
+      justify-content : space-between;
+      button{
+        padding : 12px 15px;
+        border : none;
+        border-radius : 5px;
+        background-color : #4E4FEB;
+        color : #fff;
+        font-size : 1rem;
+      }
+    }
+  }
+`
+
+const EmptyDiv= styled.div`
+  display : grid;
+  place-items : center;
+  height : 50vh;
+  h3{
+    text-transform : capitalize;
+    font-weight : 300;
+    font-size : 4.6rem;
   }
 `
 

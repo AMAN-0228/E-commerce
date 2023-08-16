@@ -1,10 +1,34 @@
 const CartReducer = (state,action)=>{
     if(action.type === "ADD_TO_CART"){
-        let {id,color,amount,product} = action.payload
+        let {id,color,quantity,product} = action.payload
+        let existingCartProduct = state.cart.find((item)=>{
+            return item.id == id + color
+        })
+        if(existingCartProduct){
+            let updatedCartProduct = state.cart.map(item=>{
+                let newQuantity = item.quantity + quantity
+                if(newQuantity > item.max){
+                    newQuantity = item.max
+                }
+                if(item.id ==id + color){
+                    return{
+                        ...item,
+                        quantity : newQuantity
+                    }
+                }
+                else{
+                    return item
+                }
+            })
+            return{
+                ...state,
+                cart : updatedCartProduct,
+            }
+        }
         const cartProduct = {
             id : id + color,
             color,
-            amount,
+            quantity,
             name : product.name,
             image : product.image[0].url,
             price : product.price,
@@ -26,6 +50,12 @@ const CartReducer = (state,action)=>{
         return{
             ...state,
             cart : updatedCart,
+        }
+    }
+    if(action.type === "CLEAR_CART"){
+        return{
+            ...state,
+            cart : [],
         }
     }
     return{

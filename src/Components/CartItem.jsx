@@ -2,13 +2,14 @@ import React from "react";
 import FormatePrice from "./FormatePrice";
 import { MdDelete } from "react-icons/md";
 import { useCartContext } from "../context/CartContext";
+import QuantityToggle from "./QuantityToggle";
 
-const CartItem = ({ id, name, color, image, amount, price }) => {
+const CartItem = ({ id, name, color, image, quantity, price }) => {
     const {removeItem}=useCartContext()
   return (
     <div className="cart-item">
       <div className="item-section">
-        <figure>
+        <figure >
           <img src={image} alt={name} />
         </figure>
         <div className="item-written">
@@ -21,9 +22,11 @@ const CartItem = ({ id, name, color, image, amount, price }) => {
       <div className="item-section">
         <FormatePrice price={price} />
       </div>
-      <div className="item-section">component</div>
       <div className="item-section">
-        <FormatePrice price={price * amount} />
+        <QuantityToggle quantity={quantity} />
+      </div>
+      <div className="item-section">
+        <FormatePrice price={price * quantity} />
       </div>
       <div className="item-section">
         <MdDelete className="remove-item" onClick={()=>removeItem(id)}/>
