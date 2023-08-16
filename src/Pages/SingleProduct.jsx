@@ -9,6 +9,7 @@ import { MdSecurity } from 'react-icons/md'
 import FormatePrice from '../Components/FormatePrice'
 import MyImg from '../Components/MyImg'
 import Star from '../Components/Star'
+import AddToCart from '../Components/AddToCart'
 
 const API =  "https://api.pujakaitem.com/api/products"
 
@@ -91,6 +92,7 @@ const SingleProduct = () => {
               <p>ID :<span> {id} </span></p>
               <p>Brand :<span> {company}</span></p>
             </div>
+            {stock > 0 && <AddToCart product={singleProduct}/>}
           </div>
         </div>
       </div>

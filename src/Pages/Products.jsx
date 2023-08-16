@@ -47,9 +47,11 @@ const StyledGri = styled.section`
     }
     .products-page-productsShow{
       padding : 10px;
-      display : flex;
-      flex-wrap : wrap;
-      justify-content : space-between;
+      // display : flex;
+      // flex-wrap : wrap;
+      // justify-content : space-between;
+      display : grid;
+      grid-template-columns : repeat(3,1fr);
       gap : 20px;
       border : 2px solid #61677A;
       border-radius : 8px;
