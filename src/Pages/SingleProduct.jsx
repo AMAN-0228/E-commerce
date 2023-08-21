@@ -3,7 +3,6 @@ import { useProductContext } from '../context/ProductContext'
 import { useParams } from 'react-router-dom'
 import { styled } from 'styled-components'
 import PageNavigation from '../Components/PageNavigation'
-import Container from '../Components/styled/Container'
 import { TbReplace, TbTruckDelivery } from "react-icons/tb";
 import { MdSecurity } from 'react-icons/md'
 import FormatePrice from '../Components/FormatePrice'

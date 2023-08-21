@@ -3,8 +3,10 @@ import { StyledNav } from './styled/Header.styled'
 import { NavLink } from 'react-router-dom'
 import { FaShoppingCart } from "react-icons/fa";
 import { FaBarsStaggered ,FaX} from "react-icons/fa6";
+import { useCartContext } from '../context/CartContext';
 const Nav = () => {
   const [toggle, setToggle] = useState(false);
+  const {total_item}= useCartContext();
   return (
     <StyledNav>
       <ul className={toggle?'sideNav':''}>
@@ -31,7 +33,7 @@ const Nav = () => {
         <li>
           <NavLink to='/cart' onClick={()=>setToggle(false)}>
           <FaShoppingCart/>
-            <span>10</span>
+            <span>{total_item}</span>
           </NavLink>
         </li>
       </ul>

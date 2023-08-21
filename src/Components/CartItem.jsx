@@ -5,10 +5,10 @@ import { useCartContext } from "../context/CartContext";
 import QuantityToggle from "./QuantityToggle";
 
 const CartItem = ({ id, name, color, image, quantity, price }) => {
-    const {removeItem}=useCartContext()
+    const {removeItem,increment,decrement}=useCartContext()
   return (
     <div className="cart-item">
-      <div className="item-section">
+      <div className="item-section img-section">
         <figure >
           <img src={image} alt={name} />
         </figure>
@@ -19,11 +19,11 @@ const CartItem = ({ id, name, color, image, quantity, price }) => {
           </p>
         </div>
       </div>
-      <div className="item-section">
+      <div className="item-section cart-hide">
         <FormatePrice price={price} />
       </div>
       <div className="item-section">
-        <QuantityToggle quantity={quantity} />
+        <QuantityToggle quantity={quantity} Increment={()=>increment(id)} Decrement={()=>decrement(id)}/>
       </div>
       <div className="item-section">
         <FormatePrice price={price * quantity} />

@@ -12,7 +12,7 @@ const getLocalCartData = () => {
 };
 const initialState = {
   cart: getLocalCartData(),
-  total_items: "",
+  total_item: "",
   total_amount: "",
   shipping_fees: 500,
 };
@@ -31,13 +31,20 @@ const CartContextProvider = ({ children }) => {
   const clearCart = () => {
     dispatch({ type: "CLEAR_CART" });
   };
+  const increment = (id)=>{
+    console.log("inc",id)
+    dispatch({type : "INCREMENT" , payload : id})
+  }
+  const decrement = (id)=>{
+    dispatch({type : "DECREMENT" , payload : id})
+  }
    useEffect(()=>{
-    console.log(state.cart)
+    dispatch({type : "TOTAL_ITEM_PRICE"})
     localStorage.setItem("e-commerceCart",JSON.stringify(state.cart))
   },[state.cart])
   return (
     <CartContext.Provider
-      value={{ ...state, addToCart, removeItem, clearCart }}
+      value={{ ...state, addToCart, removeItem, clearCart, increment, decrement }}
     >
       {children}
     </CartContext.Provider>
