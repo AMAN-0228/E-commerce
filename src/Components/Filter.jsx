@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useFilterContext } from '../context/FilterContext'
 import { styled } from 'styled-components';
 import FormatePrice from './FormatePrice';
@@ -8,9 +8,9 @@ const Filter = () => {
     updateFilter,
     all_Products,
     resetFilter,
-    filter :{text,category,company,price,maxPrice,minPrice}
+    filter :{text,category,price,maxPrice,minPrice}
   } = useFilterContext();
-  const [companyName, setCompanyName] = useState(company);
+  // const [companyName, setCompanyName] = useState(company);
 
   // to get unique value of each field
   const getUniqueData = (data,property)=>{
