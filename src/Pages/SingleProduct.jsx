@@ -18,10 +18,11 @@ const SingleProduct = () => {
   const {getSingleProduct,singleProduct,singleLoading} = useProductContext();
   useEffect(()=>{
     getSingleProduct(`${API}?id=${id}`)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[id])
   console.log("singleProduct",singleProduct)
   const {
-    id:productId,
+    // id:productId,
     name,
     company,
     price,
